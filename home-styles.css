@@ -233,17 +233,14 @@
 }
 
 .gallery-item img {
-  width: 100%;
-  max-height: 220px; /* Your existing max-height */
-  object-fit: cover; /* Your existing object-fit */
-  border-radius: 4px; /* Your existing border-radius */
-  margin-bottom: 10px; /* Your existing margin */
-  border: 2px solid var(--patrollers-gold); /* Your existing border */
-  /* The global rotation for poster 3.png has been removed from here */
+  width: 100%; /* Image will take the full width of its container */
+  height: auto;  /* Height will adjust to maintain the image's aspect ratio */
+  /* max-height: 220px; /* <-- REMOVED to allow image to display full height */
+  /* object-fit: cover;  <-- REMOVED (or change to 'contain' if needed, but auto height handles aspect ratio) */
+  border-radius: 4px;
+  margin-bottom: 10px;
+  border: 2px solid var(--patrollers-gold);
 }
-
-/* The specific fix for 'poster 3.png' is now handled in the mobile media query below */
-
 
 .gallery-item .gallery-caption {
   font-family: 'Comic Neue', sans-serif;
@@ -319,14 +316,6 @@
   .issues-grid { grid-template-columns: repeat(2, 1fr); } /* Show 2 columns */
   .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
   .teaser-gallery { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-
-  /* You could also apply the rotation for tablets if they also show the image sideways */
-  /*
-  .gallery-item img[src="images/poster 3.png"] {
-    transform: rotate(90deg);
-    max-height: 350px; // Adjust as needed if it becomes too tall
-  }
-  */
 }
 
 @media (max-width: 480px) { /* Mobile */
@@ -335,14 +324,4 @@
   .gallery-grid { grid-template-columns: 1fr; }
   .teaser-gallery { grid-template-columns: 1fr; }
   .special-edition-badge { font-size: 1.4em; padding: 5px 15px;}
-
-  /* Apply rotation specifically for 'poster 3.png' on mobile devices */
-  .gallery-item img[src="images/poster 3.png"] {
-    transform: rotate(90deg);
-    /* If the rotated image is too tall or wide on mobile after rotation,
-       you might need to adjust its max-height or max-width here.
-       For example, if it becomes too tall: */
-    /* max-height: 250px; /* Or an appropriate value for mobile */
-    /* width: auto; /* Allow width to adjust to maintain aspect ratio if height is constrained */
-  }
 }
