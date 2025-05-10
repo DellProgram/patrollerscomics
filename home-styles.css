@@ -224,6 +224,7 @@
   box-shadow: 6px 6px 5px var(--patrollers-gold);
 }
 
+/* Base styles for gallery images (Desktop First) */
 .gallery-item img {
   width: 100%; /* Image will take the full width of its container */
   height: auto;  /* Height will adjust to maintain the image's aspect ratio by default */
@@ -231,6 +232,8 @@
   margin-bottom: 10px;
   border: 2px solid var(--patrollers-gold);
   object-fit: contain; /* Ensures the entire image is visible, scaled down if necessary */
+  display: block; /* Good practice for images in layouts */
+  box-sizing: border-box; /* Ensures width/height include border/padding */
 }
 
 .gallery-item .gallery-caption {
@@ -315,12 +318,12 @@
 
   /* === MOBILE SPECIFIC GALLERY IMAGE STYLING === */
   .gallery-item img {
-    width: 100%;     /* Fill the width of the gallery item */
+    /* display: block; already set in base style */
+    /* box-sizing: border-box; already set in base style */
+    /* width: 100%; already set in base style */
     height: 280px;   /* Set a fixed height for all gallery images on mobile */
-    max-height: 280px; /* Enforce this maximum height */
+    /* max-height: 280px; /* Redundant due to height, but harmless */
     object-fit: cover; /* Cover the area, cropping if aspect ratio mismatches */
-                       /* This will make tall images like 'poster 3.png' fit the height */
-                       /* and be cropped, rather than squishing or taking too much space. */
-    object-position: center center; /* Center the image within its frame */
+    object-position: center center; /* Center the image content if cropped */
   }
 }
