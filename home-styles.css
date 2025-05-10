@@ -234,12 +234,32 @@
 
 .gallery-item img {
   width: 100%;
-  max-height: 220px;
-  object-fit: cover;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  border: 2px solid var(--patrollers-gold);
+  max-height: 220px; /* Your existing max-height */
+  object-fit: cover; /* Your existing object-fit */
+  border-radius: 4px; /* Your existing border-radius */
+  margin-bottom: 10px; /* Your existing margin */
+  border: 2px solid var(--patrollers-gold); /* Your existing border */
 }
+
+/* Specific fix for the 'poster 3.png' image orientation.
+  This rotates the image 90 degrees clockwise.
+  If it's rotated the other way, you might need -90deg.
+  The EXIF data in the image is likely causing it to display sideways on some browsers/devices.
+  Editing the image itself to strip/correct EXIF data is the most robust long-term solution.
+*/
+.gallery-item img[src="images/poster 3.png"] {
+  transform: rotate(90deg);
+  /* After rotation, the image's perceived width and height swap.
+    If this causes layout issues (e.g., it becomes too tall for its container 
+    or makes the gallery item much taller than others), you might need to:
+    1. Adjust `max-height` specifically for this rotated image, possibly within media queries.
+       e.g., max-height: 280px; /* Or whatever value fits its new orientation */
+    2. Ensure its container (.gallery-item) can accommodate the new dimensions or
+       set a fixed height for all .gallery-item elements if uniformity is critical.
+    3. Forcing a square-ish container or a specific aspect ratio for the image might also be options.
+  */
+}
+
 
 .gallery-item .gallery-caption {
   font-family: 'Comic Neue', sans-serif;
@@ -315,6 +335,13 @@
   .issues-grid { grid-template-columns: repeat(2, 1fr); } /* Show 2 columns */
   .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
   .teaser-gallery { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  /* Example of adjusting the rotated image on tablets if needed */
+  /*
+  .gallery-item img[src="images/poster 3.png"] {
+    max-height: 350px; // Adjust as needed
+  }
+  */
 }
 
 @media (max-width: 480px) { /* Mobile */
@@ -323,4 +350,15 @@
   .gallery-grid { grid-template-columns: 1fr; }
   .teaser-gallery { grid-template-columns: 1fr; }
   .special-edition-badge { font-size: 1.4em; padding: 5px 15px;}
+
+  /* If the rotated 'poster 3.png' is too tall or wide on mobile after rotation,
+    you might need to adjust its max-height or max-width here.
+    For example, if it becomes too tall:
+  */
+  /*
+  .gallery-item img[src="images/poster 3.png"] {
+    max-height: 250px; // Or an appropriate value for mobile
+    width: auto; // Allow width to adjust to maintain aspect ratio if height is constrained
+  }
+  */
 }
