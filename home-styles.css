@@ -12,7 +12,7 @@
 
 .featured-issue .issue-cover-container img {
     max-width: 100%;
-    max-height: 75vh; /* Increased from 65vh to 75vh */
+    max-height: 75vh;
     border: 5px solid var(--comic-black);
     border-radius: 6px;
     box-shadow: 8px 8px 0 var(--patrollers-medium-grey), 0 0 20px rgba(0,0,0,0.3) inset;
@@ -29,14 +29,10 @@
   color: var(--comic-black) !important;
   text-shadow: 1px 1px 0px rgba(255,255,255,0.3);
 }
-.cta-button-black-text:hover {
-  /* color: var(--comic-black) !important; /* Optional: force black text on hover too */
-}
 
 /* 2. "More Issues" Grid - Items stacked vertically */
 .issues-grid {
     display: grid;
-    /* Each item will take the full width, stacking them vertically */
     grid-template-columns: 1fr;
     gap: 25px;
     text-align: center;
@@ -46,24 +42,23 @@
   flex-direction: column;
   align-items: center;
   transition: transform 0.2s ease;
-  padding: 15px; /* Add some padding inside items */
+  padding: 15px;
 }
 .issue-item:hover { transform: translateY(-6px); }
 
-/* Ensure items in dark theme look correct */
 .issues-grid.dark-theme-card .issue-item h3 {
   color: var(--patrollers-yellow);
   text-shadow: 1px 1px 0 var(--comic-black);
-  margin-top: 0; /* Adjust spacing */
+  margin-top: 0;
   margin-bottom: 8px;
-  font-size: 2.1em; /* Slightly smaller h3 */
+  font-size: 2.1em;
 }
 
 .issues-grid.dark-theme-card .issue-item p {
   color: var(--patrollers-light-grey-card);
-  font-size: 1em; /* Slightly smaller text */
-  margin-bottom: 15px; /* Space before button */
-  flex-grow: 1; /* Allow text to take available space */
+  font-size: 1em;
+  margin-bottom: 15px;
+  flex-grow: 1;
   text-align: center;
 }
 
@@ -73,7 +68,7 @@
   border-color: var(--comic-black);
   box-shadow: 3px 3px 0px var(--comic-black);
   text-shadow: 1px 1px 0px rgba(255,255,255,0.3);
-  margin-top: auto; /* Push button to bottom */
+  margin-top: auto;
 }
 
 .issues-grid.dark-theme-card .issue-item .cta-button-small:hover {
@@ -86,11 +81,11 @@
 
 .issue-cover-container.small-cover img {
   width: 100%;
-  max-width: 260px; /* Keep max width */
+  max-width: 260px;
   height: auto;
   border: 4px solid var(--comic-black);
   border-radius: 4px;
-  margin-bottom: 15px; /* Adjusted margin */
+  margin-bottom: 15px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .issue-cover-container.small-cover img:hover { transform: scale(1.07); box-shadow: 6px 6px 12px rgba(0,0,0,0.45); }
@@ -127,7 +122,7 @@
     display: block;
 }
 
-.special-edition-feature .special-cover-container img.promo-image { /* Target the specific image */
+.special-edition-feature .special-cover-container img.promo-image {
   max-width: 100%;
   height: auto;
   border: 5px solid var(--comic-black);
@@ -153,20 +148,19 @@
   white-space: nowrap;
 }
 
-/* Patreon Lock Styles (Ensure these are present and target .promo-image) */
 .patreon-link-locked {
   display: block;
   position: relative;
   overflow: hidden;
-  border-radius: 4px; /* Should match image border-radius if image has one */
+  border-radius: 4px;
   cursor: pointer;
 }
 
-.patreon-link-locked .promo-image { /* This targets the image inside the locked link */
+.patreon-link-locked .promo-image {
   max-width: 100%;
   height: auto;
   display: block;
-  border-radius: 4px; /* Match link border-radius */
+  border-radius: 4px;
   filter: none;
   opacity: 1;
   transform: none;
@@ -187,7 +181,7 @@
   background-size: 90px 90px;
   opacity: 1;
   pointer-events: none;
-  border-radius: 4px; /* Match link/image border-radius */
+  border-radius: 4px;
 }
 
 .patreon-link-locked:hover .promo-image {
@@ -195,10 +189,8 @@
   filter: brightness(1.05);
 }
 
-/* Style the CTA button in the special edition section */
 .special-edition-feature .support-cta {
-    margin-top: 20px; /* Adjust spacing */
-    /* Inherits .cta-button styles from global, can override if needed */
+    margin-top: 20px;
 }
 
 
@@ -224,7 +216,7 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between; /* Ensures caption is at the bottom */
 }
 
 .gallery-item:hover {
@@ -234,19 +226,18 @@
 
 .gallery-item img {
   width: 100%; /* Image will take the full width of its container */
-  height: auto;  /* Height will adjust to maintain the image's aspect ratio */
-  /* max-height: 220px; /* <-- REMOVED to allow image to display full height */
-  /* object-fit: cover;  <-- REMOVED (or change to 'contain' if needed, but auto height handles aspect ratio) */
+  height: auto;  /* Height will adjust to maintain the image's aspect ratio by default */
   border-radius: 4px;
   margin-bottom: 10px;
   border: 2px solid var(--patrollers-gold);
+  object-fit: contain; /* Ensures the entire image is visible, scaled down if necessary */
 }
 
 .gallery-item .gallery-caption {
   font-family: 'Comic Neue', sans-serif;
   font-size: 0.95em;
   color: var(--patrollers-light-grey-card);
-  margin-top: auto;
+  margin-top: auto; /* Pushes caption to the bottom if image is short */
   padding-top: 5px;
   font-style: italic;
 }
@@ -277,7 +268,6 @@
     text-shadow: 2px 2px 0 var(--comic-black), var(--glitch-text-shadow-cyan-main);
 }
 
-/* Styling for the animated Patrollers logo */
 .patrollers-logo-animated {
   max-width: 150px;
   height: auto;
@@ -286,8 +276,8 @@
   margin-right: auto;
   margin-bottom: 10px;
   animation: logo-pulse 2.5s infinite ease-in-out;
-  border: none; /* Overriding potential general img border from .teaser-item img */
-  box-shadow: none; /* Overriding potential general img shadow from .teaser-item img */
+  border: none;
+  box-shadow: none;
 }
 
 @keyframes logo-pulse {
@@ -312,16 +302,25 @@
 
 /* Responsive adjustments for HOME page elements */
 @media (max-width: 768px) { /* Tablet */
-  /* Adjust grid columns for tablet */
-  .issues-grid { grid-template-columns: repeat(2, 1fr); } /* Show 2 columns */
+  .issues-grid { grid-template-columns: repeat(2, 1fr); }
   .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
   .teaser-gallery { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
 }
 
 @media (max-width: 480px) { /* Mobile */
-  /* Adjust grid columns for mobile */
-  .issues-grid { grid-template-columns: 1fr; } /* Stack issues vertically */
-  .gallery-grid { grid-template-columns: 1fr; }
+  .issues-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: 1fr; } /* Gallery items stack on mobile */
   .teaser-gallery { grid-template-columns: 1fr; }
   .special-edition-badge { font-size: 1.4em; padding: 5px 15px;}
+
+  /* === MOBILE SPECIFIC GALLERY IMAGE STYLING === */
+  .gallery-item img {
+    width: 100%;     /* Fill the width of the gallery item */
+    height: 280px;   /* Set a fixed height for all gallery images on mobile */
+    max-height: 280px; /* Enforce this maximum height */
+    object-fit: cover; /* Cover the area, cropping if aspect ratio mismatches */
+                       /* This will make tall images like 'poster 3.png' fit the height */
+                       /* and be cropped, rather than squishing or taking too much space. */
+    object-position: center center; /* Center the image within its frame */
+  }
 }
