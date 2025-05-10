@@ -1,0 +1,446 @@
+/* Comic Page (comic.html) Specific Styles */
+
+/* --- CSS Variables for Theming --- */
+:root {
+  /* Base Colors */
+  --font-sans: Arial, sans-serif; /* Default sans-serif font */
+  --font-comic-display: 'Bangers', cursive; /* For titles, indicators */
+  --font-comic-text: 'Comic Neue', sans-serif; /* For less stylized comic text if needed */
+  --font-action: 'Action Man', sans-serif; /* For buttons */
+
+  /* Light Theme Palette (some variables might be overridden by global-styles.css if loaded after or more specific) */
+  --bg-primary: #f0f0f0;                            /* Default light page background if global doesn't override */
+  --bg-card: rgba(245, 245, 245, 0.98);            /* Card backgrounds */
+  --bg-input: #eeeeee;                             /* Input/select backgrounds */
+  
+  --text-primary: #333333;                         /* Primary text color for light theme context */
+  --text-headings: #333333;                        /* Heading text color for light theme context */
+  --text-accent: #FFD700;                          /* Accent color (yellow) */
+  --text-button: #000000;                          /* Text on primary buttons */
+  --text-button-hover: #ffffff;                    /* Text on hovered primary buttons */
+  --text-button-disabled: #cccccc;                 /* Text on disabled buttons */
+
+  --border-primary: #000000;                       /* Primary border color (e.g., comic panel, buttons) */
+  --border-secondary: #999999;                     /* Secondary border color (e.g., inputs, dividers) */
+  --border-accent: #FFD700;                        /* Accent border color (e.g., on hover/focus) */
+
+  --button-gradient-primary: linear-gradient(#FFD700, #FFC300); /* Gold/Yellow */
+  --button-gradient-hover: linear-gradient(#00BFFF, #00FFFF);   /* Blue/Cyan */
+  --button-bg-disabled: #999999;                   /* Disabled button background */
+
+  --shadow-color: rgba(0, 0, 0, 0.1);              /* General shadow color */
+  --shadow-strong-color: rgba(0, 0, 0, 0.08);      /* Stronger shadow color */
+  --text-shadow-glitch-main: none;                 
+  --text-shadow-glitch-hover: none;                
+
+  /* Toggle Button Specific */
+  --toggle-bg: #dddddd;
+  --toggle-icon-sun: "☀️";
+  --toggle-icon-moon: "🌙";
+  --toggle-button-text-color: var(--text-primary); 
+
+  /* Zoom Overlay Specific */
+  --zoom-overlay-bg: rgba(0, 0, 0, 0.85);
+  --zoom-image-border: #ffffff;
+  --zoom-close-button-color: #ffffff;
+  --zoom-close-button-hover-color: var(--text-accent);
+  --zoom-nav-button-bg: rgba(0, 0, 0, 0.4);
+  --zoom-nav-button-hover-bg: rgba(0, 0, 0, 0.7);
+  --zoom-nav-button-disabled-bg: rgba(0, 0, 0, 0.2);
+  --zoom-nav-button-text-color: #ffffff;
+}
+
+body.dark-mode {
+  /* Dark Theme Palette Overrides for elements styled by comic-styles.css */
+  /* Note: global-styles.css already sets a dark body background */
+  --bg-primary: #1a1a1a; /* Used if an element specifically calls for --bg-primary in dark mode */
+  --bg-card: rgba(40, 40, 40, 0.98);
+  --bg-input: #333333;
+
+  --text-primary: #e0e0e0;
+  --text-headings: #f0f0f0;
+  --text-button: #e0e0e0;
+  --text-button-hover: #ffffff;
+  --text-button-disabled: #777777;
+
+  --border-primary: #555555;
+  --border-secondary: #555555;
+
+  --button-gradient-primary: linear-gradient(#505050, #333333);
+  --button-bg-disabled: #444444;
+
+  --shadow-color: rgba(255, 255, 255, 0.05);
+  --shadow-strong-color: rgba(255, 255, 255, 0.04);
+
+  --toggle-bg: #555555;
+  --toggle-button-text-color: var(--text-primary);
+
+  --zoom-image-border: #444444;
+}
+/* --- End CSS Variables --- */
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 16px; 
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-sans);
+  /* Body background is primarily controlled by global-styles.css */
+  /* background-color: var(--bg-primary); */ /* Fallback if global-styles isn't loaded */
+  color: var(--text-primary); /* This will be light text due to global-styles dark body */
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.content-wrapper {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; 
+  padding: 20px 15px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-y: auto; 
+}
+
+.comic-viewer.card {
+  /* This card is light-themed by default from global-styles.css's .card definition */
+  /* background-color: var(--bg-card); */ /* Uses --patrollers-light-grey-card from global-styles if more specific */
+  border-radius: 12px;
+  box-shadow: 0 8px 25px var(--shadow-color), 0 4px 10px var(--shadow-strong-color);
+  padding: clamp(15px, 3vw, 25px); 
+  width: clamp(320px, 85vw, 900px);
+  margin: 20px auto; 
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.comic-viewer h1 {
+  font-family: var(--font-comic-display);
+  /* color: var(--text-headings); Color will be dark from global-styles .card h1 */
+  text-shadow: 1px 1px 0 var(--text-accent), var(--text-shadow-glitch-main);
+  margin-bottom: 0.75em; 
+  font-size: clamp(1.8em, 4vw, 2.5em); 
+  text-align: center;
+}
+
+.issue-select-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+  border-bottom: 2px solid var(--border-secondary); /* Uses comic-styles var, might need alignment with global */
+  flex-wrap: wrap;
+}
+
+.issue-select-container label {
+  font-family: var(--font-comic-display);
+  font-size: clamp(1.4em, 3vw, 1.6em);
+  /* color: var(--text-headings); Will take color from .card context */
+  text-shadow: 1px 1px 0 var(--text-accent);
+}
+
+#issue-select {
+  font-family: var(--font-comic-display);
+  font-size: clamp(1.2em, 2.5vw, 1.4em);
+  padding: 0.4em 0.6em;
+  padding-right: 35px; 
+  border: 2px solid var(--border-secondary);
+  border-radius: 6px;
+  background-color: var(--bg-input);
+  color: var(--text-primary); /* Text color for select element */
+  box-shadow: 2px 2px 0 var(--border-secondary);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--text-primary) 50%),
+    linear-gradient(135deg, var(--text-primary) 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) calc(1em - 0.1em), 
+    calc(100% - 13px) calc(1em - 0.1em);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#issue-select:hover,
+#issue-select:focus {
+  border-color: var(--border-accent);
+  box-shadow: 2px 2px 0 var(--border-accent);
+  outline: none;
+}
+
+#issue-select option {
+  font-family: var(--font-comic-text);
+  font-size: 1rem; 
+  background-color: var(--bg-input); 
+  color: var(--text-primary);
+}
+
+.comic-panel {
+  border: clamp(3px, 0.5vw, 5px) solid var(--border-primary); 
+  margin-bottom: 1.25em;
+  background-color: var(--patrollers-dark-grey); /* Explicitly set to global dark grey */
+  box-shadow: none; 
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; 
+  padding: 10px; 
+  border-radius: 4px;
+  overflow: hidden;
+  flex-grow: 1; 
+  min-height: 200px; 
+  position: relative;
+  box-sizing: border-box; 
+}
+
+.comic-panel img {
+  display: block;
+  max-width: 100%;    
+  max-height: 100%;   
+  height: auto;       
+  object-fit: contain; 
+  cursor: zoom-in;
+  transition: transform 0.2s ease-out;
+  box-sizing: border-box; 
+}
+
+.comic-panel img:hover {
+  transform: scale(1.02);
+}
+
+.comic-navigation {
+  margin-top: 1.25em;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 10px; 
+}
+
+.nav-button {
+  font-family: var(--font-action);
+  background: var(--button-gradient-primary);
+  color: var(--text-button);
+  padding: 0.6em 1.2em; 
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: clamp(1em, 2.5vw, 1.5em); 
+  border: 2px solid var(--border-primary);
+  box-shadow: 3px 3px 0px var(--border-primary);
+  transition: all 0.15s ease;
+  cursor: pointer;
+  flex-shrink: 0; 
+}
+
+.nav-button:hover {
+  background: var(--button-gradient-hover);
+  color: var(--text-button-hover);
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0px var(--border-primary);
+  text-shadow: var(--text-shadow-glitch-hover);
+}
+
+.nav-button:disabled {
+  background: var(--button-bg-disabled);
+  color: var(--text-button-disabled);
+  cursor: not-allowed;
+  box-shadow: 1px 1px 0px var(--border-secondary); 
+  border-color: var(--border-secondary);
+}
+
+#page-indicator {
+  font-family: var(--font-comic-display);
+  font-size: clamp(1.5em, 3.5vw, 2em); 
+  /* color: var(--text-headings); Will take color from .card context */
+  text-shadow: 1px 1px 0px var(--text-accent), var(--text-shadow-glitch-main);
+  white-space: nowrap; 
+}
+
+/* --- Dark Mode Toggle Button Style --- */
+#darkModeToggle {
+  font-family: var(--font-action);
+  background-color: var(--toggle-bg);
+  color: var(--toggle-button-text-color); 
+  border: 2px solid var(--border-primary);
+  border-radius: 20px; 
+  padding: 5px 5px; 
+  cursor: pointer;
+  margin-left: 15px;
+  font-size: 1em; 
+  min-width: 50px; 
+  text-align: center;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  position: relative; 
+  overflow: hidden; 
+  box-shadow: 2px 2px 0px var(--border-primary); 
+}
+
+#darkModeToggle::before { 
+  content: var(--toggle-icon-sun); 
+  display: inline-block;
+  font-size: 1.2em; 
+  line-height: 1;
+  transition: content 0.3s ease; 
+}
+
+body.dark-mode #darkModeToggle::before {
+  content: var(--toggle-icon-moon); 
+}
+
+#darkModeToggle:hover {
+  opacity: 0.9;
+  box-shadow: 1px 1px 0px var(--border-primary); 
+  transform: translate(1px, 1px);
+}
+/* --- End Dark Mode Toggle --- */
+
+/* --- Zoom Functionality Styles --- */
+.zoom-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--zoom-overlay-bg);
+  display: none; 
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+  padding: 20px; 
+  box-sizing: border-box;
+  overflow: auto; 
+}
+
+.zoom-overlay.active {
+  display: flex;
+}
+
+#zoomedComicImage {
+  display: block; 
+  margin: auto;   
+  max-width: 85vw; 
+  max-height: 85vh; 
+  object-fit: contain; 
+  box-shadow: 0 0 30px var(--shadow-color); 
+  border: 3px solid var(--zoom-image-border); 
+  border-radius: 4px;
+}
+
+.close-zoom-button {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: clamp(2em, 5vw, 3em); 
+  color: var(--zoom-close-button-color);
+  cursor: pointer;
+  line-height: 1;
+  text-shadow: 0 0 5px var(--border-primary); 
+  font-family: Arial, sans-serif;
+  z-index: 1052; 
+}
+.close-zoom-button:hover {
+  color: var(--zoom-close-button-hover-color);
+}
+
+/* Zoom Navigation Buttons (Themed) */
+.zoom-nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--zoom-nav-button-bg);
+  color: var(--zoom-nav-button-text-color);
+  border: none;
+  font-size: 2.5em;
+  padding: 10px 12px;
+  cursor: pointer;
+  z-index: 1051;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  line-height: 1;
+  font-weight: bold;
+}
+.zoom-nav-button:hover {
+  background-color: var(--zoom-nav-button-hover-bg);
+  transform: translateY(-50%) scale(1.1);
+}
+.zoom-nav-button.prev { left: 15px; }
+.zoom-nav-button.next { right: 15px; }
+
+.zoom-nav-button:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+  background-color: var(--zoom-nav-button-disabled-bg);
+  transform: translateY(-50%);
+}
+/* --- End of Zoom Functionality Styles --- */
+
+
+#backToTopBtn {
+  z-index: 1000;
+  /* Styles for backToTopBtn are assumed to be in global-styles.css */
+}
+
+
+/* Responsive adjustments for COMIC page elements */
+@media (max-width: 768px) { /* Tablet */
+  .comic-viewer.card {
+    width: clamp(320px, 90vw, 900px); 
+    padding: clamp(15px, 2.5vw, 20px);
+  }
+   .comic-panel img {
+    max-height: 100%; 
+  }
+  .comic-panel {
+    padding: 8px; 
+  }
+}
+
+@media (max-width: 480px) { /* Mobile */
+  .content-wrapper {
+    padding: 10px 5px;
+    align-items: flex-start; 
+  }
+  .comic-viewer.card {
+    width: clamp(100% - 20px, 95vw, 900px); 
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .comic-navigation {
+    flex-direction: column; 
+    gap: 15px;
+  }
+  .nav-button {
+    width: 70%; 
+    padding: 0.7em 1em;
+  }
+   .comic-panel img {
+    max-height: 100%; 
+  }
+  .comic-panel {
+    padding: 5px; 
+  }
+  .close-zoom-button {
+    top: 15px;
+    right: 15px;
+  }
+}

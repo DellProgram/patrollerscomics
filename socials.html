@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Patrollers HQ!</title>
+  <link rel="stylesheet" href="global-styles.css">
+  <link rel="icon" href="images/transparent symbol copy.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Action+Man&family=Comic+Neue:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6001790580977212"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="comic.html">Read</a>
+    <a href="questions.html">About</a>
+    <a href="socials.html" class="active">Contact</a> 
+    <a href="support.html">Support Us!</a>
+    <a href="private_policy.html">Policy</a>
+  </nav>
+
+  <div class="content-wrapper">
+    <div class="card contact-page-content"> 
+      <h1>Contact PATROLLERS HQ!</h1>
+      <p>Got a hot tip? A burning question for the creators? Want to report a dimensional anomaly? Or just want to send some fan energy our way? You're in the right place to make contact with the team behind Patrollers!</p>
+    </div>
+
+    <div class="card">
+      <h2>Webtoon Transmission Uplink</h2>
+      <p>Join the Patrollers community on Webtoon! Subscribe, rate, and comment on the latest pages!</p>
+      <p><a href="https://www.webtoons.com/en/canvas/patrollers/list?title_no=973223" target="_blank" rel="noopener" class="cta-button-small">PATROLLERS ON WEBTOON</a></p>
+    </div>
+
+    <div class="card">
+      <h2>Twitter Feed</h2>
+      <p>For real-time updates, explosive sneak peeks, character dossiers, and direct chatter with the creators, follow our Twitter feed!</p>
+      <p><a href="https://x.com/ComicsOasis" target="_blank" rel="noopener" class="cta-button-small">@ComicsOasis ON TWITTER</a></p>
+    </div>
+    
+    <div class="card">
+      <h2>Direct Comms Channel (Email)</h2>
+      <p>For press kits, collaboration proposals, or highly classified inquiries:</p>
+      <p><a href="mailto:oasiscomics363@gmail.com" class="cta-button-small">oasiscomics363@gmail.com</a></p>
+    </div>
+
+     <div class="card">
+      <h2>Join the Inner Circle (Patreon)</h2>
+      <p>Want to be more than a reader? Become a vital part of the Patrollers mission and gain access to classified content by supporting us on Patreon!</p>
+      <p><a href="support.html" class="cta-button-small">ACCESS PATREON SUPPORT</a></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; <span id="currentYear"></span> Oasis Comics. All Rights Reserved.</p>
+    <p><a href="private_policy.html">Privacy Policy</a> | <a href="support.html">Support the Creators!</a></p>
+  </footer>
+
+  <button id="backToTopBtn" title="Go to top">TOP</button>
+  <script>
+    // Dynamic Year for Footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Back to Top Button Functionality
+    let backToTopBtn = document.getElementById("backToTopBtn");
+    if (backToTopBtn) { // Check if the button exists
+        window.onscroll = function() {scrollFunction()};
+        function scrollFunction() {
+          if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            backToTopBtn.style.display = "block";
+          } else {
+            backToTopBtn.style.display = "none";
+          }
+        }
+        backToTopBtn.addEventListener('click', function() {
+          // Smooth scroll to top
+          window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+    }
+
+    // Active Nav Link
+    // This script will add an 'active' class to the current page's link in the navigation.
+    document.addEventListener("DOMContentLoaded", function() {
+        const links = document.querySelectorAll("nav a");
+        // Get the current page's file name (e.g., 'socials.html')
+        const currentPath = window.location.pathname.split("/").pop(); 
+        
+        links.forEach(link => {
+            const linkPath = link.getAttribute("href").split("/").pop();
+            link.classList.remove("active"); // Remove active from all first
+            if (linkPath === currentPath) {
+                link.classList.add("active");
+            }
+        });
+
+        // Special handling if the current page is index.html (Home)
+        if (currentPath === "" || currentPath === "index.html") {
+            const homeLink = document.querySelector("nav a[href='index.html']");
+            if (homeLink) {
+                // Ensure other active classes are removed before adding to home
+                links.forEach(link => link.classList.remove("active"));
+                homeLink.classList.add("active");
+            }
+        }
+    });
+  </script>
+</body>
+</html>

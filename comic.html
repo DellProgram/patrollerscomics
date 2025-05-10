@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patrollers Comic Reader - Immersive Design</title>
+  <link rel="stylesheet" href="global-styles.css">
+  <link rel="icon" href="images/transparent symbol copy.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Action+Man&family=Comic+Neue:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6001790580977212"
+     crossorigin="anonymous"></script>
+  <style>
+    /* Minimalist Comic Reader Styles - Brighter Theme */
+    :root {
+      --reader-bg: var(--patrollers-medium-grey, #333333); 
+      --reader-text-primary-on-dark: var(--patrollers-light-grey-card, #3d3d3d); /* Text for dark backgrounds */
+      --reader-text-primary-on-light: var(--patrollers-dark-grey, #101010);    /* Text for light backgrounds */
+      --reader-accent: var(--patrollers-yellow, #FFD700);
+      --reader-accent-hover: var(--patrollers-gold, #FFC700);
+      
+      /* Header and Controls will now be light */
+      --reader-header-controls-bg: var(--patrollers-light-grey-card, #3d3d3d); 
+      
+      /* Buttons on the light controls bar */
+      --reader-button-bg-on-light: var(--patrollers-dark-grey, #101010);
+      --reader-button-text-on-light: var(--patrollers-light-grey-card, #3d3d3d);
+      --reader-button-border-on-light: var(--reader-accent, #FFD700);
+      --reader-button-hover-bg-on-light: var(--patrollers-medium-grey, #333333);
+      --reader-button-hover-text-on-light: var(--reader-accent, #FFD700);
+
+      /* Fallback for original button style if needed elsewhere, though not used in current controls */
+      --reader-button-bg: var(--patrollers-medium-grey, #333333); 
+      --reader-button-hover-bg: var(--reader-accent, #FFD700);
+      --reader-button-hover-text: var(--patrollers-dark-grey, #101010);
+      --reader-border-color: var(--reader-accent, #FFD700); 
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Comic Neue', sans-serif;
+      background-color: var(--reader-bg); 
+      color: var(--reader-text-primary-on-dark); /* Default text for dark page bg */
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav.main-nav { 
+      background-color: var(--patrollers-gold); 
+      color: var(--comic-black); 
+      padding: 0.9em 0;
+      text-align: center;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+      border-bottom: 6px solid var(--patrollers-medium-grey, #333333); /* CHANGED border color */
+      position: sticky; 
+      top: 0;
+      z-index: 1000; 
+    }
+    nav.main-nav a { 
+      font-family: 'Bangers', cursive;
+      color: var(--comic-black);
+      text-decoration: none;
+      margin: 0 14px;
+      padding: 12px 18px;
+      border-radius: 6px;
+      transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, text-shadow 0.2s ease;
+      font-size: 2em;
+      text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
+      display: inline-block;
+    }
+    nav.main-nav a:hover, nav.main-nav a:focus {
+      background-color: var(--patrollers-electric-blue);
+      color: var(--comic-white);
+      text-shadow: var(--glitch-text-shadow-blue-hover);
+      transform: translateY(-3px) scale(1.08);
+    }
+
+    .comic-reader-container {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+      box-sizing: border-box;
+      position: relative; 
+    }
+
+    .reader-header {
+      width: 100%;
+      max-width: 900px;
+      margin-bottom: 1rem;
+      text-align: center;
+      padding: 0.75rem 0.5rem; 
+      background-color: var(--reader-header-controls-bg); /* CHANGED to light gray */
+      border-radius: 8px;
+      border: 1px solid var(--patrollers-dark-grey, #101010); /* Darker border for contrast */
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .reader-header h1 {
+      font-family: 'Bangers', cursive;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      color: var(--reader-accent); /* Accent yellow title on light gray */
+      text-shadow: 1px 1px 0 var(--patrollers-dark-grey, #101010); /* Dark shadow for pop */
+      margin: 0 0 0.5rem 0;
+    }
+
+    .issue-selector-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.75rem; 
+    }
+
+    .issue-selector-wrapper label {
+      font-family: 'Action Man', sans-serif;
+      font-size: clamp(1.1rem, 2.8vw, 1.4rem); 
+      color: var(--reader-text-primary-on-light); /* Dark text on light header */
+    }
+
+    #issue-select-reader { /* Already styled to be light with dark text */
+      font-family: 'Bangers', cursive;
+      background-color: var(--patrollers-light-grey-card, #f9f9f9); 
+      color: var(--patrollers-dark-grey, #101010); 
+      border: 2px solid var(--reader-accent); /* Accent border */
+      border-radius: 8px; 
+      padding: 0.5rem 1rem; 
+      font-size: clamp(1.2rem, 3vw, 1.5rem); 
+      appearance: none; 
+      -webkit-appearance: none; 
+      -moz-appearance: none;    
+      text-align: center;
+      text-align-last: center; 
+      cursor: pointer;
+      min-width: 100px; 
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+    #issue-select-reader:focus {
+      outline: none; 
+      border-color: var(--reader-accent-hover); 
+      box-shadow: 0 0 0 3px rgba(255, 199, 0, 0.4); 
+    }
+    #issue-select-reader:hover { /* Hover for dropdown */
+        border-color: var(--reader-accent-hover);
+        background-color: var(--patrollers-yellow); 
+        color: var(--comic-black);
+    }
+
+    .comic-display-area {
+      width: 100%;
+      max-width: 800px; 
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1rem; 
+      position: relative; 
+    }
+
+    #comic-page-image-reader {
+      max-width: 100%;
+      max-height: 78vh; 
+      object-fit: contain;
+      border-radius: 4px;
+      border: 2px solid var(--reader-accent); /* CHANGED border to accent yellow */
+      cursor: zoom-in;
+      transition: transform 0.2s ease-out, border-color 0.2s ease-out;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2); /* Subtle shadow for the image itself */
+    }
+    #comic-page-image-reader:hover {
+        transform: scale(1.015);
+        border-color: var(--reader-accent-hover);
+        box-shadow: 0 0 15px var(--reader-accent-hover);
+    }
+
+    .reader-controls {
+      width: 100%;
+      max-width: 700px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      background-color: var(--reader-header-controls-bg); /* CHANGED to light gray */
+      border-radius: 8px;
+      border: 1px solid var(--patrollers-dark-grey, #101010); /* Darker border for contrast */
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .reader-nav-btn { /* Buttons on the light controls bar */
+      font-family: 'Action Man', sans-serif;
+      background-color: var(--reader-button-bg-on-light); /* Dark background */
+      color: var(--reader-button-text-on-light); /* Light text */
+      border: 1px solid var(--reader-button-border-on-light); /* Accent border */
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+    .reader-nav-btn:hover:not(:disabled) {
+      background-color: var(--reader-button-hover-bg-on-light); /* Medium gray hover */
+      color: var(--reader-button-hover-text-on-light); /* Accent text on hover */
+      border-color: var(--reader-button-hover-text-on-light); /* Accent border on hover */
+    }
+    .reader-nav-btn:disabled {
+      opacity: 0.5; /* More visible disabled state */
+      cursor: not-allowed;
+      background-color: var(--patrollers-medium-grey); 
+      border-color: var(--patrollers-dark-grey);
+      color: var(--patrollers-dark-grey);
+    }
+
+    #page-indicator-reader {
+      font-family: 'Bangers', cursive;
+      font-size: clamp(1.2rem, 3vw, 1.5rem);
+      color: var(--reader-accent); /* Accent yellow on light gray bar */
+      text-shadow: 1px 1px 0 var(--patrollers-dark-grey, #101010);
+    }
+
+    /* Zoom Overlay */
+    .zoom-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: none; 
+      flex-direction: column; 
+      justify-content: center;
+      align-items: center;
+      z-index: 2000; 
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+    .zoom-modal-overlay.active {
+      display: flex;
+    }
+    #zoomed-image-reader {
+      max-width: 95%;
+      max-height: 85vh; 
+      object-fit: contain;
+      border-radius: 4px;
+      border: 2px solid var(--reader-accent);
+      margin-bottom: 1rem; 
+    }
+    .zoom-controls {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    .zoom-nav-btn-modal { /* Zoom buttons remain dark with light text for overlay */
+      font-family: 'Action Man', sans-serif;
+      background-color: var(--patrollers-dark-grey); 
+      color: var(--patrollers-light-grey-card);
+      border: 1px solid var(--reader-accent);
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+    .zoom-nav-btn-modal:hover:not(:disabled) {
+      background-color: var(--patrollers-medium-grey);
+      color: var(--reader-accent);
+      border-color: var(--reader-accent);
+    }
+    .zoom-nav-btn-modal:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    #close-zoom-btn-reader {
+      background-color: var(--patrollers-red-glitch, #FF003C);
+      color: var(--comic-white, #FFFFFF); 
+      border-color: var(--patrollers-red-glitch, #FF003C);
+    }
+    #close-zoom-btn-reader:hover {
+      background-color: darkred;
+      border-color: darkred;
+      color: white;
+    }
+
+    footer.main-footer { 
+      background-color: var(--patrollers-medium-grey);
+      color: var(--patrollers-light-grey-card);
+      text-align: center;
+      padding: 30px 0;
+      margin-top: auto; 
+      border-top: 8px solid var(--patrollers-medium-grey, #333333); /* CHANGED border color */
+      position: relative; 
+      z-index: 10; 
+    }
+    footer.main-footer p { margin: 6px 0; font-size: 0.95em; }
+    footer.main-footer a { color: var(--patrollers-yellow); text-decoration: none; font-weight: bold; }
+    footer.main-footer a:hover { color: var(--patrollers-electric-blue); }
+
+    #backToTopBtn {
+      z-index: 1001;
+    }
+
+    @media (max-width: 640px) {
+      .reader-controls {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .reader-nav-btn {
+        width: 100%;
+        text-align: center;
+      }
+      #page-indicator-reader {
+        margin: 0.5rem 0;
+      }
+      .zoom-controls {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .zoom-nav-btn-modal {
+        width: 80%;
+        text-align: center;
+      }
+      .issue-selector-wrapper {
+        flex-direction: column; 
+        gap: 0.25rem;
+      }
+      #issue-select-reader {
+        width: 60%; 
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav class="main-nav"> 
+    <a href="index.html">Home</a>
+    <a href="comic.html?issue=1">Read</a>
+    <a href="questions.html">About</a>
+    <a href="socials.html">Contact</a>
+    <a href="support.html">Support Us!</a>
+    <a href="private_policy.html">Policy</a>
+  </nav>
+
+  <div class="comic-reader-container">
+    <header class="reader-header">
+      <h1 id="comic-title-reader">Patrollers Comic</h1>
+      <div class="issue-selector-wrapper">
+        <label for="issue-select-reader">ISSUE:</label>
+        <select id="issue-select-reader">
+          </select>
+      </div>
+    </header>
+
+    <div class="comic-display-area">
+      <img id="comic-page-image-reader" src="https://placehold.co/800x1200/333333/f9f9f9?text=LOADING...&font=bangers" alt="Comic Page Loading...">
+    </div>
+
+    <div class="reader-controls">
+      <button id="prev-page-reader" class="reader-nav-btn">PREVIOUS</button>
+      <span id="page-indicator-reader">? / ?</span>
+      <button id="next-page-reader" class="reader-nav-btn">NEXT</button>
+    </div>
+  </div>
+
+  <div id="zoom-modal-reader" class="zoom-modal-overlay">
+    <img id="zoomed-image-reader" src="" alt="Zoomed Comic Page">
+    <div class="zoom-controls">
+        <button id="zoom-prev-reader" class="zoom-nav-btn-modal">PREV</button>
+        <button id="close-zoom-btn-reader" class="zoom-nav-btn-modal">CLOSE</button>
+        <button id="zoom-next-reader" class="zoom-nav-btn-modal">NEXT</button>
+    </div>
+  </div>
+
+  <footer class="main-footer"> 
+    <p>&copy; <span id="currentYear"></span> Oasis Comics. All Rights Reserved.</p>
+    <p><a href="private_policy.html">Privacy Policy</a></p>
+    <script>document.getElementById('currentYear').textContent = new Date().getFullYear();</script>
+  </footer>
+
+  <button id="backToTopBtn" title="Go to top">TOP</button> 
+  <script>
+    // --- DOM Element References (New IDs) ---
+    const comicPageImageReader = document.getElementById('comic-page-image-reader');
+    const prevButtonReader = document.getElementById('prev-page-reader');
+    const nextButtonReader = document.getElementById('next-page-reader');
+    const pageIndicatorReader = document.getElementById('page-indicator-reader');
+    const comicTitleReader = document.getElementById('comic-title-reader'); 
+    const issueSelectReader = document.getElementById('issue-select-reader');
+    
+    const browserTabTitleElement = document.querySelector('title'); 
+
+    const zoomModalReader = document.getElementById('zoom-modal-reader');
+    const zoomedImageReader = document.getElementById('zoomed-image-reader');
+    const closeZoomBtnReader = document.getElementById('close-zoom-btn-reader');
+    const zoomPrevReader = document.getElementById('zoom-prev-reader');
+    const zoomNextReader = document.getElementById('zoom-next-reader');
+    
+    const backToTopBtn = document.getElementById("backToTopBtn"); 
+
+    // --- Comic Page Data (from your existing structure) ---
+    const comicPages = {
+      1: [
+        "images/issue1/1.png", "images/issue1/2.png", "images/issue1/3.png", "images/issue1/4.png", "images/issue1/5.png",
+        "images/issue1/6.png", "images/issue1/7.png", "images/issue1/8.png", "images/issue1/9.png", "images/issue1/10.png",
+        "images/issue1/11.png", "images/issue1/12.png", "images/issue1/13.png", "images/issue1/14.png", "images/issue1/15.png",
+        "images/issue1/16.png", "images/issue1/17.png", "images/issue1/18.png", "images/issue1/19.png", "images/issue1/20.png",
+        "images/issue1/21.png", "images/issue1/22.png", "images/issue1/23.png", "images/issue1/24.png", "images/issue1/25.png",
+        "images/issue1/26.png", "images/issue1/27.png", "images/issue1/28.png", "images/issue1/29.png", "images/issue1/30.png",
+        "images/issue1/31.png", "images/issue1/32.png", "images/issue1/33.png", "images/issue1/34.png", "images/issue1/35.png",
+        "images/issue1/Next time on Patrollers!.png"
+      ],
+      2: [
+         "images/issue2/1.png", "images/issue 2 cover.png","images/issue2/2.png", "images/issue2/3.png", "images/issue2/4.png", "images/issue2/5.png",
+        "images/issue2/6.png", "images/issue2/7.png", "images/issue2/8.png", "images/issue2/9.png", "images/issue2/10.png",
+        "images/issue2/11.png", "images/issue2/12.png", "images/issue2/13.png", "images/issue2/14.png", "images/issue2/15.png",
+        "images/issue2/16.png", "images/issue2/17.png", "images/issue2/18.png", "images/issue2/19.png", "images/issue2/20.png",
+        "images/issue2/21.png", "images/issue2/22.png", "images/issue2/23.png", "images/issue2/24.png", "images/issue2/25.png",
+        "images/issue2/26.png",
+        "images/issue2/Next time on Patrollers!.png"
+      ],
+      3: [
+        "images/issue3/cover page.png", "images/issue3/2.png", "images/issue3/3.png", "images/issue3/4.png", "images/issue3/5.png",
+        "images/issue3/6.png", "images/issue3/7.png", "images/issue3/8.png", "images/issue3/9.png", "images/issue3/10.png",
+        "images/issue3/11.png", "images/issue3/12.png", "images/issue3/13.png", "images/issue3/14.png", "images/issue3/15.png",
+        "images/issue3/16.png", "images/issue3/17.png"
+      ],
+      4: (function() {
+        const pages = ["images/issue4/1.png", "images/issue4/issue 4 cover.png"];
+        for (let i = 2; i <= 25; i++) { pages.push(`images/issue4/${i}.png`); }
+        pages.push("images/issue4/Next time on Patrollers!.png");
+        return pages;
+      })(),
+      5: (function() {
+        const pages = ["images/issue5/1.png", "images/issue5/issue 5 cover.png"];
+        for (let i = 2; i <= 25; i++) { pages.push(`images/issue5/${i}.png`); }
+        pages.push("images/issue5/Next time on Patrollers!.png");
+        return pages;
+      })()
+    };
+
+    // --- State Variables ---
+    let currentIssue = 1;
+    let currentPage = 0;
+    let currentPages = [];
+
+    // --- Core Comic Reader Functions ---
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    function generateDropdownOptions() {
+      if (!issueSelectReader) return;
+      issueSelectReader.innerHTML = '';
+      Object.keys(comicPages).forEach(issueNum => {
+        const option = document.createElement('option');
+        option.value = issueNum;
+        option.textContent = `${issueNum}`; 
+        issueSelectReader.appendChild(option);
+      });
+      issueSelectReader.addEventListener('change', handleIssueChange);
+    }
+
+    function updateDropdownSelection() {
+      if (!issueSelectReader) return;
+      issueSelectReader.value = currentIssue;
+    }
+
+    function handleIssueChange(event) {
+      const selectedIssue = parseInt(event.target.value, 10);
+      if (!isNaN(selectedIssue)) {
+          switchIssue(selectedIssue);
+      }
+    }
+
+    function switchIssue(issueNum) {
+      if (issueNum === currentIssue || !comicPages[issueNum]) return;
+      currentIssue = issueNum;
+      currentPages = comicPages[currentIssue] || [];
+      currentPage = 0;
+      updatePage();
+      updateDropdownSelection();
+    }
+    
+    function updatePage() {
+      if (!comicPageImageReader) return;
+      if (!currentPages || currentPages.length === 0) {
+        comicPageImageReader.src = 'https://placehold.co/800x1200/333333/f9f9f9?text=ISSUE+DATA+MISSING&font=bangers';
+        comicPageImageReader.alt = `Patrollers Issue ${currentIssue} - Data Missing`;
+        if(pageIndicatorReader) pageIndicatorReader.textContent = `Error`;
+        if(comicTitleReader) comicTitleReader.textContent = `Patrollers - Issue ${currentIssue} Error`;
+        if(browserTabTitleElement) browserTabTitleElement.textContent = `Patrollers - Issue ${currentIssue} Error`;
+        if(prevButtonReader) prevButtonReader.disabled = true;
+        if(nextButtonReader) nextButtonReader.disabled = true;
+        if(zoomPrevReader) zoomPrevReader.disabled = true;
+        if(zoomNextReader) zoomNextReader.disabled = true;
+        return;
+      }
+
+      currentPage = Math.max(0, Math.min(currentPage, currentPages.length - 1));
+      const newSrc = currentPages[currentPage];
+      
+      const tempImg = new Image();
+      tempImg.onload = () => {
+          comicPageImageReader.src = newSrc;
+          comicPageImageReader.alt = `Patrollers Issue ${currentIssue} - Page ${currentPage + 1}`;
+          if (zoomModalReader.classList.contains('active')) {
+              zoomedImageReader.src = newSrc;
+              zoomedImageReader.alt = comicPageImageReader.alt + " - Zoomed";
+          }
+      };
+      tempImg.onerror = () => {
+          comicPageImageReader.src = 'https://placehold.co/800x1200/333333/FF003C?text=IMAGE+LOAD+ERROR&font=bangers';
+          comicPageImageReader.alt = `Error loading page ${currentPage + 1}`;
+          if (zoomModalReader.classList.contains('active')) {
+              zoomedImageReader.src = comicPageImageReader.src;
+          }
+      };
+      comicPageImageReader.src = 'https://placehold.co/800x1200/333333/f9f9f9?text=LOADING...&font=bangers'; 
+      tempImg.src = newSrc;
+
+      if(pageIndicatorReader) pageIndicatorReader.textContent = `${currentPage + 1} / ${currentPages.length}`;
+      if(comicTitleReader) comicTitleReader.textContent = `Patrollers - Issue ${currentIssue}`; 
+      if(browserTabTitleElement) browserTabTitleElement.textContent = `Patrollers - Issue ${currentIssue} - Page ${currentPage + 1}`;
+      
+      if(prevButtonReader) prevButtonReader.disabled = (currentPage === 0);
+      if(nextButtonReader) nextButtonReader.disabled = (currentPage === currentPages.length - 1);
+      if(zoomPrevReader) zoomPrevReader.disabled = (currentPage === 0);
+      if(zoomNextReader) zoomNextReader.disabled = (currentPage === currentPages.length - 1);
+    }
+
+    function initializeReader() {
+      generateDropdownOptions();
+      const requestedIssueParam = getQueryParam('issue');
+      let issueNum = parseInt(requestedIssueParam, 10);
+      if (isNaN(issueNum) || !comicPages[issueNum]) issueNum = 1;
+
+      currentIssue = issueNum;
+      currentPages = comicPages[currentIssue] || [];
+      currentPage = 0;
+      updatePage();
+      updateDropdownSelection();
+    }
+
+    // --- Page Navigation Event Listeners ---
+    if(prevButtonReader) prevButtonReader.addEventListener('click', () => { if (currentPage > 0) { currentPage--; updatePage(); }});
+    if(nextButtonReader) nextButtonReader.addEventListener('click', () => { if (currentPage < currentPages.length - 1) { currentPage++; updatePage(); }});
+
+    // --- Zoom Functionality ---
+    function openZoom() {
+      if (!comicPageImageReader || !zoomedImageReader || !zoomModalReader) return;
+      if (currentPages.length > 0 && comicPageImageReader.src && !comicPageImageReader.src.includes('placehold.co') && !comicPageImageReader.src.includes('IMAGE+LOAD+ERROR')) {
+        zoomedImageReader.src = comicPageImageReader.src;
+        zoomedImageReader.alt = comicPageImageReader.alt + " - Zoomed";
+        zoomModalReader.classList.add('active');
+        document.body.style.overflow = 'hidden'; 
+      }
+    }
+
+    function closeZoom() {
+      if (!zoomModalReader) return;
+      zoomModalReader.classList.remove('active');
+      document.body.style.overflow = ''; 
+      if(zoomedImageReader) zoomedImageReader.src = ""; 
+    }
+
+    if (comicPageImageReader) comicPageImageReader.addEventListener('click', openZoom);
+    if (closeZoomBtnReader) closeZoomBtnReader.addEventListener('click', closeZoom);
+    if (zoomModalReader) zoomModalReader.addEventListener('click', (event) => { if (event.target === zoomModalReader) closeZoom(); });
+    
+    if (zoomPrevReader) zoomPrevReader.addEventListener('click', (event) => {
+        event.stopPropagation();
+        if (currentPage > 0) { currentPage--; updatePage(); }
+    });
+    if (zoomNextReader) zoomNextReader.addEventListener('click', (event) => {
+        event.stopPropagation();
+        if (currentPage < currentPages.length - 1) { currentPage++; updatePage(); }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (event) => {
+        if (zoomModalReader.classList.contains('active')) { 
+            if (event.key === 'Escape') closeZoom();
+            else if (event.key === 'ArrowLeft' && !zoomPrevReader.disabled) { currentPage--; updatePage(); }
+            else if (event.key === 'ArrowRight' && !zoomNextReader.disabled) { currentPage++; updatePage(); }
+        } else { 
+            if (event.key === 'ArrowLeft' && !prevButtonReader.disabled) { currentPage--; updatePage(); }
+            else if (event.key === 'ArrowRight' && !nextButtonReader.disabled) { currentPage++; updatePage(); }
+        }
+    });
+
+    // --- Back to Top Button ---
+    function handleScrollForBackToTop() {
+      if (backToTopBtn) {
+        if (window.scrollY > 200) {
+          backToTopBtn.style.display = "block";
+          backToTopBtn.style.opacity = "1";
+        } else {
+          backToTopBtn.style.opacity = "0";
+          setTimeout(() => {
+            if (window.scrollY <= 200) backToTopBtn.style.display = "none";
+          }, 300); 
+        }
+      }
+    }
+    if (backToTopBtn) {
+      backToTopBtn.style.opacity = "0";
+      backToTopBtn.style.display = "none";
+      backToTopBtn.style.transition = "opacity 0.3s ease-in-out";
+
+      window.addEventListener('scroll', handleScrollForBackToTop);
+      backToTopBtn.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+    }
+
+    // --- Initialize on Load ---
+    window.addEventListener('load', () => {
+        initializeReader();
+        handleScrollForBackToTop(); 
+    });
+  </script>
+</body>
+</html>

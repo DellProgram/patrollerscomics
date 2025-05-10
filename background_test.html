@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Test</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: sans-serif; padding: 20px; background-color: #333; /* Darker body for contrast */ }
+        .test-text { color: lightgreen; font-size: 24px; text-align: center; margin-top: 50px; position: relative; z-index: 10; }
+        /* Ensure test container is visible */
+        .glitch-background-container { border: 5px dashed red; min-height: 300px; }
+    </style>
+</head>
+<body>
+    <div class="glitch-background-container">
+        </div>
+    <div class="page-content-wrapper">
+        <p class="test-text">If you see this light green text, style.css is linked. Is the background in the red dashed box visible?</p>
+    </div>
+</body>
+</html>

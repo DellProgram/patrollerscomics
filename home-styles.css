@@ -1,0 +1,326 @@
+/* Homepage (index.html) Specific Styles */
+
+/* 1. Featured Issue section */
+.featured-issue.dark-theme-card h2 {
+  color: var(--patrollers-yellow);
+  text-shadow: 2px 2px 0 var(--patrollers-electric-blue), 4px 4px 0 var(--patrollers-cyan), 0 0 8px var(--comic-black);
+}
+
+.featured-issue.dark-theme-card p {
+  color: var(--patrollers-light-grey-card);
+}
+
+.featured-issue .issue-cover-container img {
+    max-width: 100%;
+    max-height: 75vh; /* Increased from 65vh to 75vh */
+    border: 5px solid var(--comic-black);
+    border-radius: 6px;
+    box-shadow: 8px 8px 0 var(--patrollers-medium-grey), 0 0 20px rgba(0,0,0,0.3) inset;
+    margin-bottom: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.featured-issue .issue-cover-container img:hover {
+  transform: scale(1.04) rotate(-1.5deg);
+  box-shadow: 10px 10px 5px var(--patrollers-medium-grey), 0 0 30px rgba(0,0,0,0.4) inset;
+}
+
+/* CTA Button with Black Text (if primarily for home, keep here) */
+.cta-button-black-text {
+  color: var(--comic-black) !important;
+  text-shadow: 1px 1px 0px rgba(255,255,255,0.3);
+}
+.cta-button-black-text:hover {
+  /* color: var(--comic-black) !important; /* Optional: force black text on hover too */
+}
+
+/* 2. "More Issues" Grid - Items stacked vertically */
+.issues-grid {
+    display: grid;
+    /* Each item will take the full width, stacking them vertically */
+    grid-template-columns: 1fr;
+    gap: 25px;
+    text-align: center;
+}
+.issue-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s ease;
+  padding: 15px; /* Add some padding inside items */
+}
+.issue-item:hover { transform: translateY(-6px); }
+
+/* Ensure items in dark theme look correct */
+.issues-grid.dark-theme-card .issue-item h3 {
+  color: var(--patrollers-yellow);
+  text-shadow: 1px 1px 0 var(--comic-black);
+  margin-top: 0; /* Adjust spacing */
+  margin-bottom: 8px;
+  font-size: 2.1em; /* Slightly smaller h3 */
+}
+
+.issues-grid.dark-theme-card .issue-item p {
+  color: var(--patrollers-light-grey-card);
+  font-size: 1em; /* Slightly smaller text */
+  margin-bottom: 15px; /* Space before button */
+  flex-grow: 1; /* Allow text to take available space */
+  text-align: center;
+}
+
+.issues-grid.dark-theme-card .issue-item .cta-button-small {
+  background: linear-gradient(45deg, var(--patrollers-yellow), var(--patrollers-gold));
+  color: var(--comic-black) !important;
+  border-color: var(--comic-black);
+  box-shadow: 3px 3px 0px var(--comic-black);
+  text-shadow: 1px 1px 0px rgba(255,255,255,0.3);
+  margin-top: auto; /* Push button to bottom */
+}
+
+.issues-grid.dark-theme-card .issue-item .cta-button-small:hover {
+  background: linear-gradient(45deg, var(--patrollers-cyan), var(--patrollers-electric-blue));
+  color: var(--comic-white) !important;
+  text-shadow: var(--glitch-text-shadow-blue-hover);
+  border-color: var(--patrollers-cyan);
+  box-shadow: 1px 1px 0px var(--comic-black);
+}
+
+.issue-cover-container.small-cover img {
+  width: 100%;
+  max-width: 260px; /* Keep max width */
+  height: auto;
+  border: 4px solid var(--comic-black);
+  border-radius: 4px;
+  margin-bottom: 15px; /* Adjusted margin */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.issue-cover-container.small-cover img:hover { transform: scale(1.07); box-shadow: 6px 6px 12px rgba(0,0,0,0.45); }
+
+/* 3. Special Edition Feature Section */
+.special-edition-feature {
+  border-color: var(--patrollers-cyan);
+  box-shadow: 0 0 20px rgba(0, 221, 255, 0.5), 7px 7px 0px var(--patrollers-electric-blue);
+  position: relative;
+  padding: 60px 30px 30px 30px;
+}
+
+.special-edition-feature h2 {
+  color: var(--patrollers-yellow);
+  text-shadow: 2px 2px 0 var(--patrollers-electric-blue), 4px 4px 0 var(--patrollers-cyan), 0 0 8px var(--comic-black);
+  margin-top: 0;
+}
+
+.special-edition-feature p {
+  color: var(--patrollers-light-grey-card);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.special-edition-feature .special-cover-container {
+  margin: 20px auto 25px auto;
+  max-width: 500px;
+  display: block;
+}
+
+.special-edition-feature .special-cover-container .patreon-link-locked {
+    display: block;
+}
+
+.special-edition-feature .special-cover-container img.promo-image { /* Target the specific image */
+  max-width: 100%;
+  height: auto;
+  border: 5px solid var(--comic-black);
+  border-radius: 6px;
+  box-shadow: 8px 8px 0 var(--patrollers-medium-grey), 0 0 20px rgba(0,0,0,0.3) inset;
+}
+
+.special-edition-badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-5deg);
+  background: linear-gradient(45deg, var(--patrollers-red-glitch), #ff4d6d);
+  color: var(--comic-white);
+  font-family: 'Bangers', cursive;
+  font-size: 1.6em;
+  padding: 6px 20px;
+  border-radius: 4px;
+  border: 3px solid var(--comic-black);
+  box-shadow: 4px 4px 0 var(--comic-black);
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+  z-index: 10;
+  white-space: nowrap;
+}
+
+/* Patreon Lock Styles (Ensure these are present and target .promo-image) */
+.patreon-link-locked {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px; /* Should match image border-radius if image has one */
+  cursor: pointer;
+}
+
+.patreon-link-locked .promo-image { /* This targets the image inside the locked link */
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px; /* Match link border-radius */
+  filter: none;
+  opacity: 1;
+  transform: none;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.patreon-link-locked::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.35);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFD700' width='90px' height='90px'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 90px 90px;
+  opacity: 1;
+  pointer-events: none;
+  border-radius: 4px; /* Match link/image border-radius */
+}
+
+.patreon-link-locked:hover .promo-image {
+  transform: scale(1.02);
+  filter: brightness(1.05);
+}
+
+/* Style the CTA button in the special edition section */
+.special-edition-feature .support-cta {
+    margin-top: 20px; /* Adjust spacing */
+    /* Inherits .cta-button styles from global, can override if needed */
+}
+
+
+/* 4. Atmosphere Gallery Section Styles */
+.atmosphere-gallery h2 {
+  text-shadow: 2px 2px 0 var(--patrollers-electric-blue), 4px 4px 0 var(--patrollers-cyan), 0 0 8px var(--comic-black);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.gallery-item {
+  background-color: rgba(20, 20, 20, 0.7);
+  border: 3px solid var(--patrollers-yellow);
+  border-radius: 6px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 4px 4px 0px var(--patrollers-medium-grey);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 6px 6px 5px var(--patrollers-gold);
+}
+
+.gallery-item img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  border: 2px solid var(--patrollers-gold);
+}
+
+.gallery-item .gallery-caption {
+  font-family: 'Comic Neue', sans-serif;
+  font-size: 0.95em;
+  color: var(--patrollers-light-grey-card);
+  margin-top: auto;
+  padding-top: 5px;
+  font-style: italic;
+}
+
+
+/* 5. Teasers Section Styles */
+.teasers-section.card { background-color: rgba(30,30,30,0.98); }
+.teasers-section h2 {
+    color: var(--patrollers-yellow);
+    text-shadow: 2px 2px 0 var(--patrollers-electric-blue), 4px 4px 0 var(--patrollers-cyan), 0 0 8px var(--comic-black);
+}
+.teaser-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; margin-top: 25px; }
+.teaser-item img {
+  max-width: 100%; height: auto; border: 4px solid var(--patrollers-yellow);
+  border-radius: 4px; box-shadow: 5px 5px 0px var(--patrollers-electric-blue);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.teaser-item img:hover { filter: brightness(1.15) saturate(1.3); transform: scale(1.03); }
+.teaser-item .teaser-caption {
+  font-family: 'Press Start 2P', cursive; font-size: 0.9em;
+  color: var(--patrollers-light-grey-card);
+  margin-top: 12px; text-align: center;
+  text-shadow: 1px 1px 0 var(--comic-black);
+}
+.teaser-item .teaser-caption.coming-soon-text {
+    font-family: 'Bangers', cursive; font-size: 1.4em;
+    color: var(--patrollers-yellow);
+    text-shadow: 2px 2px 0 var(--comic-black), var(--glitch-text-shadow-cyan-main);
+}
+
+/* Styling for the animated Patrollers logo */
+.patrollers-logo-animated {
+  max-width: 150px;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  animation: logo-pulse 2.5s infinite ease-in-out;
+  border: none; /* Overriding potential general img border from .teaser-item img */
+  box-shadow: none; /* Overriding potential general img shadow from .teaser-item img */
+}
+
+@keyframes logo-pulse {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 3px var(--patrollers-yellow));
+  }
+  50% {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 10px var(--patrollers-gold)) drop-shadow(0 0 5px var(--patrollers-yellow));
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 3px var(--patrollers-yellow));
+  }
+}
+
+.teasers-section.card.dark-theme-card .teaser-item img.patrollers-logo-animated {
+  border: none;
+  box-shadow: none;
+}
+
+/* Responsive adjustments for HOME page elements */
+@media (max-width: 768px) { /* Tablet */
+  /* Adjust grid columns for tablet */
+  .issues-grid { grid-template-columns: repeat(2, 1fr); } /* Show 2 columns */
+  .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+  .teaser-gallery { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+}
+
+@media (max-width: 480px) { /* Mobile */
+  /* Adjust grid columns for mobile */
+  .issues-grid { grid-template-columns: 1fr; } /* Stack issues vertically */
+  .gallery-grid { grid-template-columns: 1fr; }
+  .teaser-gallery { grid-template-columns: 1fr; }
+  .special-edition-badge { font-size: 1.4em; padding: 5px 15px;}
+}

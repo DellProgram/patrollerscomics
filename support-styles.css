@@ -1,0 +1,66 @@
+/* Support Page (support.html) Specific Styles */
+
+.support-page-content.card { background-color: rgba(255, 250, 205, 0.98); }
+.support-page-content h1 { color: var(--patrollers-gold); text-shadow: 2px 2px 0 var(--comic-black), var(--glitch-text-shadow-cyan-main); }
+
+/* Support Page - Promo Image Container - Reverted Styling */
+.promo-image-container {
+  position: relative;
+  margin: 30px auto;
+  max-width: 750px;
+  /* Reverted Border: Dashed gold */
+  border: 5px dashed var(--patrollers-gold);
+  /* Reverted Padding */
+  padding: 20px;
+  border-radius: 8px; /* Keep consistent radius */
+  /* Reverted Background: Yellow */
+  background-color: var(--patrollers-yellow);
+  /* Reverted Box Shadow: Inset glow + subtle outer shadow */
+  box-shadow: 0 0 15px var(--patrollers-gold) inset, 5px 5px 0 var(--comic-black);
+}
+
+.promo-image-container img { /* Assuming there's an image directly inside */
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px; /* Optional: if the image itself should be rounded */
+}
+
+
+.promo-caption {
+    font-family: 'Comic Neue', sans-serif;
+    font-style: italic;
+    font-size: 1em;
+    text-align: center;
+    margin-top: 15px;
+    color: var(--comic-black);
+}
+
+/* Specific CTA for support page, if different from global .cta-button */
+/* If .support-cta is just a themed .cta-button, it might inherit most styles.
+   This ensures its specific overrides are here. */
+.support-cta {
+    /* These styles were already in your main CSS under .support-cta
+       If they are meant to make it distinct from the base .cta-button, they are good here.
+       If .support-cta is *always* also a .cta-button, some might be redundant.
+       For separation, this is fine. */
+    background: linear-gradient(45deg, var(--patrollers-gold), var(--patrollers-yellow));
+    color: var(--comic-black) !important; /* Ensure black text if that's the intent */
+    font-size: 2.2em; /* Potentially larger than default .cta-button */
+    text-shadow: 1px 1px 0px rgba(255,255,255,0.3); /* Custom text shadow for this button */
+    /* It will also inherit properties from .cta-button if both classes are applied,
+       like padding, border, box-shadow, transition, display, margin-top, letter-spacing.
+       The hover effect below is specific. */
+}
+
+.support-cta:hover {
+    background: linear-gradient(45deg, var(--patrollers-electric-blue), var(--patrollers-cyan));
+    color: var(--comic-white) !important;
+    text-shadow: var(--glitch-text-shadow-blue-hover);
+    /* Other hover effects like transform might be inherited from .cta-button:hover
+       or can be specified here if different. */
+}
+
+/* Responsive adjustments for SUPPORT page elements can be added here if needed */
+/* @media (max-width: 768px) { ... } */
+/* @media (max-width: 480px) { ... } */

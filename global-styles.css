@@ -1,0 +1,435 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Action+Man&family=Comic+Neue:wght@400;700&family=Press+Start+2P&display=swap');
+
+/* CSS Variables - Gold Primary, Updated Glitch Palette */
+:root {
+  --patrollers-yellow: #FFD700; /* PRIMARY ACCENT */
+  --patrollers-gold: #FFC700;   /* Richer Gold Accent */
+  --patrollers-electric-blue: #007FFF; /* For Outline/Hover/Secondary Glitch */
+  --patrollers-cyan: #00DDFF;         /* PRIMARY Glitch Color */
+  --patrollers-red-glitch: #FF003C; /* New red for glitch effect */
+  --patrollers-dark-grey: #101010;     /* Base background */
+  --patrollers-medium-grey: #333333;
+  --patrollers-light-grey-card: #f9f9f9;
+  --comic-black: #000000;
+  --comic-white: #FFFFFF;
+
+  /* Glitch Text Shadow Variables - Used by various elements */
+  --glitch-text-shadow-cyan-main:
+    1px 1px 0 var(--patrollers-cyan),
+    -1px -1px 0 var(--patrollers-cyan);
+  --glitch-text-shadow-cyan-heavy: /* Example: For heavier emphasis if needed */
+    1.5px 1.5px 0 var(--patrollers-cyan),
+    -1.5px -1.5px 0 var(--patrollers-cyan);
+  --glitch-text-shadow-blue-hover: /* Blue glitch for hover effects */
+    2px 2px 0 var(--patrollers-electric-blue),
+    -2px -2px 0 var(--patrollers-cyan);
+}
+
+body {
+  font-family: 'Comic Neue', sans-serif;
+  background-color: var(--patrollers-dark-grey);
+  color: var(--patrollers-light-grey-card);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden; /* Prevents horizontal scrollbars often caused by glitch effects */
+}
+
+/* --- Glitch Background for index.html --- */
+.glitch-background-container {
+  position: fixed; /* Fixed position to stay in viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Base layer, behind all content */
+  overflow: hidden; /* Essential for clip-path animations */
+  background-image: url('images/Background.png'); /* Path relative to this CSS file */
+  background-size: cover; /* Cover the entire container */
+  background-position: center center; /* Center the image */
+  background-repeat: no-repeat; /* Explicitly prevent tiling */
+  filter: brightness(0.7) saturate(1.1) contrast(1.0);
+}
+
+.glitch-background-container::before,
+.glitch-background-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('images/Background.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.glitch-background-container::before {
+  animation: background-glitch-effect-1 1.8s infinite linear alternate;
+  z-index: 1;
+}
+
+.glitch-background-container::after {
+  animation: background-glitch-effect-2 2.2s infinite linear alternate-reverse;
+  z-index: 2;
+}
+
+/* Wrapper for all actual page content */
+.page-content-wrapper {
+    position: relative;
+    z-index: 3;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* --- PATROLLERS Main Title Styling - NEW Glitch Effect --- */
+.patrollers-title-glitch {
+  font-family: 'Bangers', cursive;
+  color: var(--comic-white);
+  position: relative;
+  text-align: center;
+  letter-spacing: 0.08em;
+  font-size: 5em;
+  margin: 0.1em 0;
+  text-decoration: line-through;
+  text-decoration-color: var(--comic-white);
+  text-decoration-thickness: 0.06em;
+  text-decoration-skip-ink: none;
+  animation: none;
+  text-shadow: none;
+  z-index: 1;
+}
+
+.patrollers-title-glitch::before,
+.patrollers-title-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.patrollers-title-glitch::before {
+  color: var(--patrollers-cyan);
+  animation: new-glitch-anim-1 2.7s infinite linear alternate;
+  z-index: -1;
+}
+
+.patrollers-title-glitch::after {
+  color: var(--patrollers-red-glitch);
+  animation: new-glitch-anim-2 2.3s infinite linear alternate;
+  z-index: -2;
+}
+
+/* Keyframes for the NEW title glitch effect (text layers) */
+@keyframes new-glitch-anim-1 { /* For ::before (cyan layer) */
+  0% { transform: translate(0, 0); clip-path: inset(0 0 0 0); }
+  5% { transform: translate(-3px, 1px) skewX(-3deg); clip-path: polygon(0 0, 100% 0, 100% 20%, 0 25%, 0 45%, 100% 50%, 100% 70%, 0 73%, 0 100%, 0% 100%); }
+  10% { transform: translate(3px, -1px) skewX(3deg); clip-path: polygon(0 10%, 100% 5%, 100% 30%, 0 33%, 0 55%, 100% 52%, 100% 80%, 0 78%, 0 0, 0% 0); }
+  15% { transform: translate(-5px, 2px) skewX(-5deg); clip-path: inset(10% 0% 30% 0%); }
+  20% { transform: translate(0, 0); clip-path: inset(0 0 0 0); }
+  30% { transform: translate(2px, -2px); clip-path: polygon(0 50%, 100% 45%, 100% 55%, 0 60%, 0 80%, 100% 75%, 100% 90%, 0 95%, 0% 100%);}
+  40% { transform: translate(4px, 1px) skewX(2deg); clip-path: polygon(0 60%, 100% 55%, 100% 70%, 0 78%, 0 20%, 100% 15%, 100% 40%, 0 43%); }
+  50% { transform: translate(-3px, -1px); clip-path: inset(20% 0% 60% 0%);}
+  60% { transform: translate(-2px, 2px) skewX(3deg); clip-path: inset(40% 0% 10% 0%); }
+  70% { transform: translate(3px, -2px) skewX(-2deg); clip-path: polygon(0 10%, 100% 15%, 100% 25%, 0 20%, 0 70%, 100% 75%, 100% 85%, 0 80%, 0% 100%);}
+  80% { transform: translate(1px, 1px); clip-path: polygon(0 22%, 100% 20%, 100% 33%, 0 35%, 0 77%, 100% 72%, 100% 88%, 0 90%); }
+  90% { transform: translate(-4px, -1px) skewX(5deg); clip-path: inset(50% 0% 5% 0%);}
+  100% { transform: translate(0, 0); clip-path: inset(0 0 0 0); }
+}
+
+@keyframes new-glitch-anim-2 { /* For ::after (red layer) */
+  0% { transform: translate(0, 0); clip-path: inset(0 0 0 0); }
+  7% { transform: translate(2px, -1px) skewX(2deg); clip-path: polygon(0 15%, 100% 20%, 100% 35%, 0 30%, 0 60%, 100% 65%, 100% 80%, 0 75%, 0 0, 0% 0); }
+  12% { transform: translate(-2px, 1px) skewX(-2deg); clip-path: polygon(0 5%, 100% 0, 100% 25%, 0 30%, 0 50%, 100% 45%, 100% 75%, 0 80%, 0 100%, 0% 100%); }
+  18% { transform: translate(4px, -2px) skewX(4deg); clip-path: inset(25% 0% 40% 0%); }
+  22% { transform: translate(0, 0); clip-path: inset(0 0 0 0); }
+  33% { transform: translate(-2px, 2px); clip-path: polygon(0 40%, 100% 35%, 100% 60%, 0 65%, 0 85%, 100% 80%, 100% 95%, 0 90%, 0% 100%);}
+  45% { transform: translate(-3px, 1px) skewX(-3deg); clip-path: polygon(0 50%, 100% 60%, 100% 80%, 0 70%, 0 10%, 100% 5%, 100% 30%, 0 35%); }
+  55% { transform: translate(3px, -1px) skewX(-2deg); clip-path: inset(5% 0% 50% 0%); }
+  68% { transform: translate(2px, 2px) skewX(1deg); clip-path: polygon(0 5%, 100% 10%, 100% 15%, 0 10%, 0 80%, 100% 85%, 100% 90%, 0 95%, 0% 100%);}
+  75% { transform: translate(-1px, -1px); clip-path: polygon(0 30%, 100% 25%, 100% 40%, 0 48%, 0 68%, 100% 60%, 100% 90%, 0 95%); }
+  88% { transform: translate(3px, 1px) skewX(-4deg); clip-path: inset(60% 0% 15% 0%);}
+  100% { transform: translate(0, 0); clip-path: inset(0 0 0 0); }
+}
+
+/* Keyframes for the MORE AGGRESSIVE background image glitch effect */
+@keyframes background-glitch-effect-1 { /* For .glitch-background-container::before */
+  0% { transform: translateX(0) skewX(0deg); opacity: 0.25; clip-path: inset(0% 0% 0% 0%); }
+  8% { transform: translateX(-8px) skewX(-1deg); opacity: 0.6; clip-path: inset(5% 75% 60% 10%); }
+  16% { transform: translateX(10px) skewX(0.5deg); opacity: 0.15; clip-path: inset(70% 8% 15% 78%); }
+  24% { transform: translateX(-6px) skewX(1deg); opacity: 0.7; clip-path: inset(25% 5% 40% 2%); }
+  32% { transform: translateX(8px) skewX(-0.8deg); opacity: 0.1; clip-path: inset(5% 60% 5% 65%); }
+  40% { transform: translateX(0) skewX(0deg); opacity: 0.5; clip-path: inset(60% 0% 10% 0%); }
+  48% { transform: translateX(12px) skewX(1.2deg); opacity: 0.65; clip-path: inset(15% 40% 70% 30%); }
+  56% { transform: translateX(-10px) skewX(-1.5deg); opacity: 0.2; clip-path: inset(55% 10% 8% 80%); }
+  64% { transform: translateX(5px) skewX(0.3deg); opacity: 0.75; clip-path: inset(35% 15% 38% 25%); }
+  72% { transform: translateX(-12px) skewX(1.3deg); opacity: 0.1; clip-path: inset(10% 75% 80% 5%); }
+  80% { transform: translateX(0) skewX(0deg); opacity: 0.4; clip-path: inset(0% 0% 0% 0%); }
+  88% { transform: translateX(8px) skewX(-0.7deg); opacity: 0.55; clip-path: inset(45% 25% 20% 50%); }
+  100% { transform: translateX(0) skewX(0deg); opacity: 0.25; clip-path: inset(0% 0% 0% 0%); }
+}
+
+@keyframes background-glitch-effect-2 { /* For .glitch-background-container::after */
+  0% { transform: translateX(0) skewY(0deg); opacity: 0.2; clip-path: inset(0% 0% 0% 0%); }
+  10% { transform: translateX(9px) skewY(0.8deg); opacity: 0.5; clip-path: inset(60% 10% 10% 70%); }
+  20% { transform: translateX(-11px) skewY(-0.6deg); opacity: 0.1; clip-path: inset(10% 80% 65% 8%); }
+  30% { transform: translateX(7px) skewY(-1.1deg); opacity: 0.6; clip-path: inset(30% 3% 50% 10%); }
+  40% { transform: translateX(-9px) skewY(0.4deg); opacity: 0.15; clip-path: inset(10% 55% 10% 70%); }
+  50% { transform: translateX(0) skewY(0deg); opacity: 0.35; clip-path: inset(50% 0% 30% 0%); }
+  60% { transform: translateX(-13px) skewY(-1.3deg); opacity: 0.65; clip-path: inset(22% 35% 58% 42%); }
+  70% { transform: translateX(11px) skewY(1.6deg); opacity: 0.05; clip-path: inset(60% 8% 12% 75%); }
+  80% { transform: translateX(4px) skewY(-0.2deg); opacity: 0.7; clip-path: inset(30% 22% 33% 18%); }
+  90% { transform: translateX(-10px) skewY(1.1deg); opacity: 0.15; clip-path: inset(8% 65% 70% 12%); }
+  100% { transform: translateX(0) skewY(0deg); opacity: 0.2; clip-path: inset(0% 0% 0% 0%); }
+}
+
+/* Main Header on Homepage (index.html) */
+.main-header {
+  background-color: rgba(20, 20, 20, 0.97);
+  color: var(--patrollers-yellow);
+  padding: 30px 20px;
+  text-align: center;
+  border-bottom: 8px solid var(--patrollers-gold);
+  position: relative;
+}
+
+.main-header .tagline {
+    font-family: 'Bangers', cursive;
+    font-size: 1.8em;
+    color: var(--comic-white);
+    text-shadow: 1.5px 1.5px 0px var(--comic-black);
+}
+
+/* Navigation Bar Styling */
+nav {
+  background-color: var(--patrollers-gold);
+  padding: 0.9em 0;
+  text-align: center;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+  border-bottom: 6px solid var(--comic-black);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+nav a {
+  font-family: 'Bangers', cursive;
+  color: var(--comic-black);
+  text-decoration: none;
+  margin: 0 14px;
+  padding: 12px 18px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, text-shadow 0.2s ease;
+  font-size: 2em;
+  text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
+  display: inline-block;
+}
+nav a:hover, nav a:focus {
+  background-color: var(--patrollers-electric-blue);
+  color: var(--comic-white);
+  text-shadow: var(--glitch-text-shadow-blue-hover);
+  transform: translateY(-3px) scale(1.08);
+}
+
+/* Main Content Area Wrapper */
+.content-wrapper {
+  flex-grow: 1;
+  padding: 25px;
+  display: block;
+  width: 100%;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+/* General Card Styling */
+.card {
+  background-color: rgba(248, 248, 248, 0.97);
+  border: 4px solid var(--comic-black);
+  border-radius: 8px;
+  box-shadow: 7px 7px 0px var(--patrollers-medium-grey);
+  padding: 30px;
+  margin-bottom: 35px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  box-sizing: border-box;
+}
+.card.dark-theme-card {
+    background-color: rgba(30, 30, 30, 0.97);
+    color: var(--patrollers-light-grey-card);
+    border: 4px solid var(--patrollers-yellow);
+    box-shadow: 7px 7px 0px var(--patrollers-gold);
+}
+.card.dark-theme-card h1, .card.dark-theme-card h2, .card.dark-theme-card h3 {
+    color: var(--patrollers-yellow);
+    text-shadow: 2px 2px 0 var(--comic-black);
+}
+.card.dark-theme-card p, .card.dark-theme-card ul li {
+    color: var(--patrollers-light-grey-card);
+}
+.card.dark-theme-card ul li::before { color: var(--patrollers-yellow); }
+.card.dark-theme-card a { color: var(--patrollers-cyan); }
+.card.dark-theme-card a:hover { color: var(--patrollers-electric-blue); }
+
+
+.card h1, .card h2 {
+  font-family: 'Bangers', cursive;
+  color: var(--patrollers-gold);
+  margin-top: 0;
+  padding-bottom: 12px;
+  margin-bottom: 25px;
+  font-size: 3.2em;
+  text-align: center;
+  text-shadow: 2px 2px 0 var(--comic-black);
+}
+
+.card h1 { font-size: 4.2em; }
+.card h2 { font-size: 3.5em; color: var(--patrollers-electric-blue); }
+.card h3 {
+  font-family: 'Bangers', cursive;
+  color: var(--patrollers-medium-grey);
+  font-size: 2.3em;
+  margin-bottom: 12px;
+  text-shadow: 1px 1px 0px var(--patrollers-yellow);
+}
+
+.card p, .card ul {
+  font-family: 'Comic Neue', sans-serif;
+  font-size: 1.15em;
+  color: var(--patrollers-dark-grey);
+  text-align: left;
+  margin-bottom: 1.2em;
+}
+.card ul { list-style: none; padding-left: 0; }
+.card ul li::before { content: "★"; margin-right: 12px; font-size: 1.3em; color: var(--patrollers-gold); }
+.card a { color: var(--patrollers-electric-blue); text-decoration: underline; font-weight: bold; }
+.card a:hover { color: var(--patrollers-gold); text-shadow: 1px 1px 0 var(--comic-black); }
+
+/* Call to Action Button Styling */
+.cta-button {
+  font-family: 'Bangers', cursive;
+  background: linear-gradient(45deg, var(--patrollers-gold), var(--patrollers-yellow));
+  color: var(--comic-black);
+  padding: 18px 35px; text-decoration: none; border-radius: 8px; font-size: 2.3em;
+  border: 4px solid var(--comic-black);
+  box-shadow: 6px 6px 0px var(--comic-black), 0 0 12px var(--patrollers-gold) inset;
+  transition: all 0.15s ease-in-out;
+  display: inline-block; margin-top: 25px; letter-spacing: 0.05em;
+}
+.cta-button:hover {
+  background: linear-gradient(45deg, var(--patrollers-electric-blue), var(--patrollers-cyan));
+  color: var(--comic-white);
+  transform: translate(4px, 4px) scale(0.97);
+  box-shadow: 1px 1px 0px var(--comic-black), 0 0 18px var(--patrollers-electric-blue) inset;
+  text-shadow: var(--glitch-text-shadow-blue-hover);
+}
+.cta-button-small { font-size: 1.4em; padding: 12px 20px; margin-top: 15px; }
+
+/* Patreon Lock Styles - MOVED HERE FOR GLOBAL ACCESS */
+.patreon-link-locked {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px; /* Should match image border-radius if image has one */
+  cursor: pointer;
+}
+
+/* Ensures the promo image within the lock container is styled correctly */
+.patreon-link-locked .promo-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px; /* Match link border-radius */
+  filter: none; /* Reset any filters if needed */
+  opacity: 1; /* Ensure full opacity */
+  transform: none; /* Reset transforms if needed */
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.patreon-link-locked::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.35); /* Semi-transparent overlay */
+  /* SVG Lock Icon */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFD700' width='90px' height='90px'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 90px 90px; /* Adjust size of the lock icon as needed */
+  opacity: 1; /* Make sure the icon is visible */
+  pointer-events: none; /* Allows clicks to go through to the link */
+  border-radius: 4px; /* Match link/image border-radius */
+}
+
+.patreon-link-locked:hover .promo-image {
+  transform: scale(1.02); /* Slight zoom on hover */
+  filter: brightness(1.05); /* Slight brightness increase */
+}
+
+
+/* Back to Top Button Styling */
+#backToTopBtn {
+  display: none; position: fixed; bottom: 35px; right: 35px; z-index: 1000;
+  border: 4px solid var(--comic-black); outline: none;
+  background-color: var(--patrollers-yellow); color: var(--comic-black);
+  cursor: pointer; padding: 12px 18px; border-radius: 50%;
+  font-family: 'Bangers', cursive; font-size: 1.8em;
+  box-shadow: 4px 4px 0px var(--comic-black);
+  transition: all 0.2s ease;
+}
+#backToTopBtn:hover { background-color: var(--patrollers-gold); transform: translateY(-4px) scale(1.1); box-shadow: 4px 8px 0px var(--comic-black); }
+
+/* Footer Styling */
+footer {
+  background-color: var(--patrollers-medium-grey);
+  color: var(--patrollers-light-grey-card);
+  text-align: center; padding: 30px 0; margin-top: auto;
+  border-top: 8px solid var(--comic-black);
+  position: relative;
+  z-index: 10;
+}
+footer p { margin: 6px 0; font-size: 0.95em; }
+footer a { color: var(--patrollers-yellow); text-decoration: none; font-weight: bold; transition: color 0.2s ease, text-shadow 0.2s ease; }
+footer a:hover { color: var(--patrollers-electric-blue); text-shadow: var(--glitch-text-shadow-cyan-main); }
+
+/* Responsive adjustments for GLOBAL elements */
+@media (max-width: 768px) { /* Tablet */
+  .main-header h1, .patrollers-title-glitch { font-size: 4em; }
+  .main-header .tagline { font-size: 1.5em; }
+  nav a { font-size: 1.7em; margin: 0 10px; padding: 10px 12px; }
+  .card h1 { font-size: 3.2em; }
+  .card h2 { font-size: 2.7em; }
+  .card h3 { font-size: 2.1em; }
+  .cta-button { font-size: 2em; }
+}
+
+@media (max-width: 480px) { /* Mobile */
+  .main-header h1, .patrollers-title-glitch { font-size: 3em; }
+  .main-header .tagline { font-size: 1.2em; }
+  nav { padding: 0.8em 0; }
+  nav a { font-size: 1.4em; margin: 5px 6px; padding: 8px 10px; }
+  .card { padding: 20px; }
+  .card h1 { font-size: 2.6em; }
+  .card h2 { font-size: 2.2em; }
+  .card h3 { font-size: 1.7em; }
+  .cta-button { font-size: 1.6em; padding: 14px 28px; }
+  #backToTopBtn { font-size: 1.5em; padding: 10px 15px; bottom: 25px; right: 25px; }
+}

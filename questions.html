@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Patrollers & Creator</title>
+  <link rel="stylesheet" href="global-styles.css"> 
+  <link rel="icon" href="images/transparent symbol copy.png" type="image/x-icon"> 
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Action+Man&family=Comic+Neue:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6001790580977212"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="comic.html?issue=1">Read</a>
+    <a href="questions.html">About</a> <a href="socials.html">Contact</a>
+    <a href="support.html">Support Us!</a>
+    <a href="private_policy.html">Policy</a>
+  </nav>
+
+  <div class="content-wrapper">
+    <div class="card about-page-content"> 
+      
+      <h1>Welcome to My World of Storytelling</h1>
+      <p>Hi!</p>
+      <p>My name is Ronald Williams, creator of Patrollers.</p>
+      <p>As a storyteller, I'm driven to craft tales that captivate and inspire. With Patrollers, I aimed to bring imagination to life. Your enthusiasm and support mean everything to me. As I continue to grow, I'm excited to take on new projects, exploring comics, scriptwriting, and storyboarding. I believe stories have the power to bring people together and leave a lasting impact. I'm honored to share my passion with you.</p>
+      <p>Stay tuned for updates on upcoming projects and behind-the-scenes peeks into my creative process. You can follow these on the <a href="socials.html">Contact</a> page!</p>
+      
+      <hr style="margin: 2em 0; border-top: 2px solid var(--patrollers-medium-grey);">
+
+      <h2>About Patrollers: The Comic</h2>
+      <p>Dive into a world of super-powered espionage hidden from public view.</p>
+      <p>Patrollers follows the journey of individuals like Austin, a 19-year-old discovering his electricity-based powers amidst a shadowy network of spies. Set in dynamic real-world locations that play a pivotal role in the unfolding story, each issue unveils new layers of intrigue, high-stakes missions reminiscent of Mission: Impossible, and the personal struggles of those wielding extraordinary abilities in secret.</p>
+      <p>Uncover the mysteries behind Austin's vivid dreams and the deeper history of this clandestine world as the adventure unfolds.</p>
+
+      <hr style="margin: 2em 0; border-top: 2px solid var(--patrollers-medium-grey);">
+
+      <h2>Frequently Asked Questions (FAQ)</h2>
+      <ul>
+        <li>💥 <strong>Who is the creator of Patrollers?</strong><br>
+            Ronald Williams is the creator and storyteller behind Patrollers.</li>
+        <li>💥 <strong>What is "Patrollers" about?</strong><br>
+            It's a comic series about super-powered espionage, following individuals like Austin, a 19-year-old discovering his electricity-based powers within a shadowy spy network.</li>
+        <li>💥 <strong>What kind of themes can readers expect?</strong><br>
+            The series features high-stakes missions, intrigue, the personal struggles of characters with secret abilities, and mysteries tied to a clandestine world.</li>
+        <li>💥 <strong>Who is a main character in Patrollers?</strong><br>
+            Austin, a 19-year-old discovering his electricity-based powers, is a key character.</li>
+        <li>💥 <strong>What are Ronald Williams' goals as a storyteller?</strong><br>
+            He aims to craft tales that captivate and inspire, bring imagination to life, and explore new projects in comics, scriptwriting, and storyboarding.</li>
+        <li>💥 <strong>How important is audience support to the creator?</strong><br>
+            Ronald states that enthusiasm and support mean everything to him.</li>
+        <li>💥 <strong>Where can I find updates on Patrollers and other projects?</strong><br>
+            Updates and behind-the-scenes content will be shared; you can find links and information on the <a href="socials.html">Contact</a> page.</li>
+        <li>💥 <strong>How can I support Patrollers?</strong><br> 
+            Reading and sharing the comic is a great way to show support! For more direct ways to contribute, please visit our <a href="support.html">Support Us!</a> page.</li>
+      </ul>
+      <p>Have more questions? Feel free to <a href="socials.html">reach out to us</a>!</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; <span id="currentYear"></span> Oasis Comics. All Rights Reserved.</p>
+    <p><a href="private_policy.html">Privacy Policy</a> | <a href="support.html">Support the Creators!</a></p>
+  </footer>
+
+  <button id="backToTopBtn" title="Go to top">TOP</button>
+  <script>
+    // Dynamic Year for Footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Back to Top Button Functionality
+    let backToTopBtn = document.getElementById("backToTopBtn");
+    if (backToTopBtn) { 
+        window.onscroll = function() {scrollFunction()};
+        function scrollFunction() {
+          if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            backToTopBtn.style.display = "block";
+          } else {
+            backToTopBtn.style.display = "none";
+          }
+        }
+        backToTopBtn.addEventListener('click', function() {
+          window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+    }
+  </script>
+</body>
+</html>
