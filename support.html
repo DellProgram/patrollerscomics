@@ -27,7 +27,7 @@
 
       <div class="promo-image-container">
         <a href="https://www.patreon.com/join/PatrollersComics?utm_source=webtoons&utm_medium=link&utm_campaign=PatrollersComics&redirect_uri=http%3A%2F%2Fm.webtoons.com%2Fapp%2Fchallenge%2FpatreonCallback%3FpageType%3DepisodeList%26title_no%3D973223" target="_blank" rel="noopener" class="patreon-link-locked">
-          <img src="Character sheet/Sombra.png" alt="Support Patrollers on Patreon - Get Exclusive Rewards" class="promo-image">
+          <img src="Character sheet/Sombra.png" alt="Support Patrollers on Patreon - Get Exclusive Rewards" class="promo-image" onerror="this.onerror=null;this.src='https://placehold.co/600x400/232323/FFF?text=Sombra+Promo';">
           </a>
         <p class="promo-caption">Click the image above to join the elite ranks on Patreon & score awesome loot!</p>
       </div>
@@ -42,7 +42,16 @@
       </ul>
       <p>Every contribution, big or small, makes a universe of difference. Thank you for powering up the Patrollers!</p>
       <a href="https://www.patreon.com/join/PatrollersComics?utm_source=webtoons&utm_medium=link&utm_campaign=PatrollersComics&redirect_uri=http%3A%2F%2Fm.webtoons.com%2Fapp%2Fchallenge%2FpatreonCallback%3FpageType%3DepisodeList%26title_no%3D973223" target="_blank" rel="noopener" class="cta-button support-cta">JOIN THE PATREON CRUSADE!</a>
-    </div>
+
+      <div class="gofundme-section" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+        <h2>Or Support Our Current Goal on GoFundMe!</h2>
+        <p>Prefer to make a one-time contribution or support a specific project? Our GoFundMe campaign helps us fund exciting new developments for Patrollers Comics, like special print editions, new artist collaborations, or expanding our online presence. Your support directly fuels art and compassion!</p>
+        <div style="text-align: center; margin-top: 20px;"> <img src="https://placehold.co/400x200/34D399/FFFFFF?text=Fuel+Art+%26+Compassion" alt="GoFundMe Campaign Image" style="max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 15px;" onerror="this.onerror=null;this.src='https://placehold.co/400x200/232323/FFF?text=GoFundMe+Campaign';">
+        </div>
+        <p>Help us reach our specific fundraising goals for these exciting new projects and initiatives. Every bit helps bring more Patrollers content to life and supports our mission of blending creativity with community impact.</p>
+        <a href="https://www.gofundme.com/f/fuel-art-and-compassion?attribution_id=sl:e8a0f667-4828-40cf-8fbf-8e4af525a73b&utm_campaign=natman_sharesheet_dash&utm_medium=customer&utm_source=email" target="_blank" rel="noopener" class="cta-button support-cta gofundme-cta" style="background-color: #00c462; border-color: #00a250;">DONATE VIA GOFUNDME</a>
+      </div>
+      </div>
   </div>
 
   <footer>
@@ -52,10 +61,12 @@
 
   <button id="backToTopBtn" title="Go to top">TOP</button>
   <script>
+    // Back to Top Button Functionality
     let backToTopBtn = document.getElementById("backToTopBtn");
+    // Show button when scrolling down
     window.onscroll = function() {scrollFunction()};
     function scrollFunction() {
-      if (backToTopBtn) {
+      if (backToTopBtn) { // Check if the button exists
         if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
           backToTopBtn.style.display = "block";
         } else {
@@ -63,22 +74,12 @@
         }
       }
     }
-    if (backToTopBtn) {
+    // Scroll to top when button is clicked
+    if (backToTopBtn) { // Check if the button exists
       backToTopBtn.addEventListener('click', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to top
       });
     }
   </script>
 </body>
 </html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Support Patrollers - Become a Hero!</title>
-  <link rel="stylesheet" href="global-styles.css">
-  <link rel="stylesheet" href="support-styles.css">
-  <link rel="icon" href="images/transparent symbol copy.png" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Action+Man&family=Comic+Neue:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
-  <script async src="
